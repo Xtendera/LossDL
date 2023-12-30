@@ -33,7 +33,7 @@ export async function readSongs(): Promise<song[]> {
         let artistName: string = songs[i].split(" - ")[0];
         let searchRes = await axios.get('https://api.deezer.com/search?order=RANKING&q=' + encodeURIComponent(songs[i]));
 
-        if (searchRes.data.data.length == 0 || !searchRes.data.data) {
+        if (searchRes.data.data.length == 0 || searchRes.data.data == undefined) {
             console.log(warn(`WARNING: ${songName} by ${artistName} not found!`));
             continue;
         }
