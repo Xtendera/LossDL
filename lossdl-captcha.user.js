@@ -72,7 +72,7 @@ function replacePage(siteKey) {
             } else {
               isCaptchaReset = true;
               document.body.style.backgroundColor = 'red';
-              document.title = 'Captcha Required!'
+              document.title = 'CAPTCHA REQUIRED!'
               var captchaElement = document.getElementById('captcha');
               if (window.getComputedStyle(captchaElement).visibility === "hidden") {
                 captchaElement.style.visibility = "visible";
