@@ -178,3 +178,5 @@ dist
 buster.zip
 buster/
 out/
+.cacheFile.json
+songs.txt
