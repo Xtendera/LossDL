@@ -29,8 +29,11 @@ export async function readSongs(): Promise<song[]> {
     songs = (await songsFileContents.text()).split("\n");
     let songObj: song[] = [];
     for (let i = 0; i < songs.length; i++) {
-        let songName: string = songs[i].split(" - ")[1];
-        let artistName: string = songs[i].split(" - ")[0];
+        if (songs[i].startsWith("//") || songs[i].trim() == "") {
+            continue;
+        }
+        let songName: string = songs[i].trim().split(" - ")[1];
+        let artistName: string = songs[i].trim().split(" - ")[0];
         let searchRes = await axios.get('https://api.deezer.com/search?order=RANKING&q=' + encodeURIComponent(songs[i]));
 
         if (searchRes.data.data.length == 0 || searchRes.data.data == undefined) {
