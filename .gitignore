@@ -175,8 +175,6 @@ dist
 .DS_Store
 
 # Project-specific
-buster.zip
-buster/
 out/
 .cacheFile.json
 songs.txt
