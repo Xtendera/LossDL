@@ -9,6 +9,7 @@
 // ==/UserScript==
 
 var isCaptchaReset = false;
+const version = "1";
 
 function replacePage(siteKey) {
   document.documentElement.innerHTML = `
@@ -112,7 +113,45 @@ function replacePage(siteKey) {
   method: "GET",
   url: "http://localhost:8072/api/olState",
   onload: function(response) {
-    if (response.readyState == 4 && response.status == 200 && response.responseText == 'lossDL') {
+    if (response.readyState == 4 && response.status == 200 && response.responseText.startsWith('lossDL')) {
+      if (response.responseText.split(" ")[1] != version) {
+        document.documentElement.innerHTML = `
+          <!DOCTYPE html>
+          <html lang="en">
+            <head>
+              <title>Version Mismatch!</title>
+              <style>
+                #captcha {
+                    height: 100vh;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    vertical-align: middle;
+                    visibility: hidden;
+                }
+
+                body {
+                    background-color: red;
+                }
+
+                h1 {
+                    text-align: center;
+                }
+              </style>
+            </head>
+            <body>
+              <h1>
+                LossDL Version ID mismatch! Please update userscript/server!
+              </h1>
+              <br />
+              <div>
+                Server Version: ${response.responseText.split(" ")[1]}
+                UserScript Version: ${version}
+              </div>
+            </body>
+          </html>
+  `;
+      }
       console.log('LossDL Server detected, getting captcha siteKey!');
       GM.xmlHttpRequest({
       method: "GET",

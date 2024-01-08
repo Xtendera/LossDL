@@ -8,7 +8,7 @@ import { readSongs, song } from './fetchSongs';
 import { BunFile } from 'bun';
 import sanitize from 'sanitize-filename';
 
-const error: ChalkInstance = chalk.red;
+const usVersion = "1";
 const warn: ChalkInstance = chalk.yellow;
 const bold: ChalkInstance = chalk.bold;
 const header: ChalkInstance = chalk.magentaBright;
@@ -99,7 +99,7 @@ const captchaServer = Bun.serve({
   async fetch(request) {
     const url = new URL(request.url);
     if (url.pathname == '/api/olState') {
-      return new Response("lossDL");
+      return new Response("lossDL " + usVersion);
     } else if (url.pathname == '/api/siteKey') {
       return new Response(captchaSitekey);
     } else if (request.method == "POST" && url.pathname == '/api/token') {
