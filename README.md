@@ -16,7 +16,7 @@ So this is basically an improved version of another script I had written in Pyth
 
 # Installation
 
-Get a list of your requested songs. 
+Get a list of your requested songs. Put them in the format shown in the songs.txt file, without the "//" part of it.
 
 Must have [Bun](https://bun.sh/), [Git](https://git-scm.com/), and [ViolentMonkey](https://violentmonkey.github.io/) installed on your browser. Click [this link](https://github.com/Xtendera/LossDL/raw/main/lossdl-captcha.user.js) to install the userscript to your browser, after installing ViolentMonkey. 
 
@@ -30,6 +30,12 @@ Install all the dependancies:
 ```shell
 bun install
 ```
+
+Run the code with:
+```shell
+bun run index.ts
+```
+And follow the instructions shown in the console.
 
 
 **WARNING**: This project is provided for educational purposes only. Piracy is illegal and unethical.
