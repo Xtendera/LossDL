@@ -8,7 +8,7 @@ import { readSongs, song } from './fetchSongs';
 import { BunFile } from 'bun';
 import sanitize from 'sanitize-filename';
 
-const usVersion = "1";
+const usVersion = "2";
 const warn: ChalkInstance = chalk.yellow;
 const bold: ChalkInstance = chalk.bold;
 const header: ChalkInstance = chalk.magentaBright;

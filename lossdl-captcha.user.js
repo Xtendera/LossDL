@@ -9,7 +9,7 @@
 // ==/UserScript==
 
 var isCaptchaReset = false;
-const version = "1";
+const version = "2";
 
 function replacePage(siteKey) {
   document.documentElement.innerHTML = `
@@ -146,6 +146,7 @@ function replacePage(siteKey) {
               <br />
               <div>
                 Server Version: ${response.responseText.split(" ")[1]}
+                <br />
                 UserScript Version: ${version}
               </div>
             </body>
