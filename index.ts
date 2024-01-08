@@ -22,7 +22,7 @@ async function getDownloadURL(id: string, format: string, captcha: string, phpSe
     h: captcha,
   }, {
     headers: {
-      'Referer': 'https://free-mp3-download.net/download.php?id=2454947245',
+      'Referer': 'https://free-mp3-download.net/download.php?id=' + id,
       'Cookie': `PHPSESSID=${phpSessionID}`,
     }
   });
