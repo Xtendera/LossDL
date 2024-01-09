@@ -8,7 +8,7 @@ So this is basically an improved version of another script I had written in Pyth
 
 # System Requirements
 
-- A relativly modern 64-bit CPU
+- A relatively modern 64-bit CPU
 - A stable and fast internet connection
 - At least 8 GB RAM
 - 500MB+ of storage (depending on the length of the songs list)
