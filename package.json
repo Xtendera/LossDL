@@ -3,7 +3,7 @@
   "module": "index.ts",
   "type": "module",
   "devDependencies": {
-    "bun-types": "^1.0.20",
+    "bun-types": "^1.0.22",
     "@types/bun": "^1.0.0",
     "@types/jsdom": "^21.1.6"
   },
