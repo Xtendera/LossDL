@@ -94,7 +94,7 @@ await Bun.sleep(1000);
 let currentCaptchaToken = '';
 let currentDlID = '';
 
-const captchaServer = Bun.serve({
+Bun.serve({
   port: 8072,
   async fetch(request) {
     const url = new URL(request.url);
