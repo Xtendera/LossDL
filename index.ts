@@ -7,6 +7,7 @@ import https from 'https';
 import { readSongs, song } from './fetchSongs';
 import { BunFile } from 'bun';
 import sanitize from 'sanitize-filename';
+import { parseArgs } from "util";
 
 const usVersion = "2";
 const warn: ChalkInstance = chalk.yellow;
@@ -35,13 +36,24 @@ async function getDownloadURL(id: string, format: string, captcha: string, phpSe
 console.log(bold(ok("LossDL\n\n")));
 await Bun.sleep(1000);
 
+// Arguement parsing
+const args = parseArgs({
+  options: {
+    useCache: {
+      type: "boolean",
+      short: "c",
+      default: false,
+    }
+  }
+})
+
 const outputDir = join(import.meta.dir, 'out');
 if (!existsSync(outputDir)) {
   console.log(warn("WARNING: Output directory does not exist, creating it now..."));
   mkdirSync(outputDir);
 }
 let songObj: song[] = [];
-if (process.argv.length > 2 && process.argv[2] == '-c') {
+if (args.values.useCache) {
   const cacheFileB: BunFile = Bun.file(join(import.meta.dir, '.cacheFile.json'));
   const cacheFileBContents = await cacheFileB.text(); 
   songObj = JSON.parse(cacheFileBContents);
@@ -141,6 +153,7 @@ for (let i = 0; i < songObj.length; i++) {
     res.pipe(fileStream);
     fileStream.on('finish', () => {
       fileStream.close();
+      Bun.write(join(import.meta.dir, ".cacheFile.json"), JSON.stringify(songObj.slice(i + 1)));
       return;
     });
     return;
