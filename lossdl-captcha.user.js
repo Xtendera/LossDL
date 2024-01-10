@@ -147,12 +147,12 @@ function replacePage(siteKey) {
               <br />
               <div>
                 Server Version: ${response.responseText.split(" ")[1]}
+                <br />
                 UserScript Version: ${version}
               </div>
             </body>
           </html>
-            `;
-        return;
+  `;
       }
       console.log('LossDL Server detected, getting captcha siteKey!');
       GM.xmlHttpRequest({
