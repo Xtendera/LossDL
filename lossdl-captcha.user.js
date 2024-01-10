@@ -3,9 +3,10 @@
 // @namespace   Violentmonkey Scripts
 // @match       https://free-mp3-download.net/*
 // @grant       GM.xmlHttpRequest
-// @version     1.0
+// @version     2
 // @author      Xtendera
 // @description 12/30/2023, 12:27:12 AM
+// @downloadURL https://github.com/Xtendera/LossDL/raw/master/lossdl-captcha.user.js
 // ==/UserScript==
 
 var isCaptchaReset = false;
@@ -146,12 +147,12 @@ function replacePage(siteKey) {
               <br />
               <div>
                 Server Version: ${response.responseText.split(" ")[1]}
-                <br />
                 UserScript Version: ${version}
               </div>
             </body>
           </html>
-  `;
+            `;
+        return;
       }
       console.log('LossDL Server detected, getting captcha siteKey!');
       GM.xmlHttpRequest({
