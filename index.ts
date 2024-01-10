@@ -9,7 +9,7 @@ import { BunFile } from 'bun';
 import sanitize from 'sanitize-filename';
 import { parseArgs } from "util";
 
-const usVersion = "2";
+const usVersion = "3";
 const warn: ChalkInstance = chalk.yellow;
 const bold: ChalkInstance = chalk.bold;
 const header: ChalkInstance = chalk.magentaBright;
