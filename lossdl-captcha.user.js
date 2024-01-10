@@ -114,7 +114,7 @@ function replacePage(siteKey) {
   url: "http://localhost:8072/api/olState",
   onload: function(response) {
     if (response.readyState == 4 && response.status == 200 && response.responseText.startsWith('lossDL')) {
-      if (response.responseText.split(" ")[1] != GM_info.script.version) {
+      if (response.responseText.split(" ")[1] != GM_info.version) {
         document.documentElement.innerHTML = `
           <!DOCTYPE html>
           <html lang="en">
