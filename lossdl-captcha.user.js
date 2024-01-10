@@ -3,14 +3,13 @@
 // @namespace   Violentmonkey Scripts
 // @match       https://free-mp3-download.net/*
 // @grant       GM.xmlHttpRequest
-// @version     2
+// @version     3
 // @author      Xtendera
 // @description 12/30/2023, 12:27:12 AM
 // @downloadURL https://github.com/Xtendera/LossDL/raw/master/lossdl-captcha.user.js
 // ==/UserScript==
 
 var isCaptchaReset = false;
-const version = "2";
 
 function replacePage(siteKey) {
   document.documentElement.innerHTML = `
@@ -115,7 +114,7 @@ function replacePage(siteKey) {
   url: "http://localhost:8072/api/olState",
   onload: function(response) {
     if (response.readyState == 4 && response.status == 200 && response.responseText.startsWith('lossDL')) {
-      if (response.responseText.split(" ")[1] != version) {
+      if (response.responseText.split(" ")[1] != GM_info.script.version) {
         document.documentElement.innerHTML = `
           <!DOCTYPE html>
           <html lang="en">
