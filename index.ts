@@ -164,11 +164,11 @@ for (let i = 0; i < songObj.length; i++) {
       process.exit(1);
     }
   }
-  let filePath: string = "";
+  let filePath: string = join(import.meta.dir, `out/${sanitize(songObj[i].artist)} - ${sanitize(songObj[i].name)}.`);;
   if (dlQuality == 'flac') {
-    filePath = join(import.meta.dir, `out/${sanitize(songObj[i].artist)} - ${sanitize(songObj[i].name)}.flac`);
+    filePath += 'flac';
   } else {
-    filePath = join(import.meta.dir, `out/${sanitize(songObj[i].artist)} - ${sanitize(songObj[i].name)}.mp3`);
+    filePath += 'mp3';
   }
   https.get(dlLink, (res) => {
     const fileStream = createWriteStream(filePath);
