@@ -43,9 +43,25 @@ const args = parseArgs({
       type: "boolean",
       short: "c",
       default: false,
+    },
+    quality: {
+      type: "string",
+      short: "q",
+      default: "mp3-320"
     }
   }
 })
+
+const qualities = ["flac", "mp3-320", "mp3-128"];
+let dlQuality = "";
+if (!qualities.includes(args.values.quality ?? "")) {
+  console.error(`"${args.values.quality}" is not an allowed quality! Allowed values are: flac, mp3-320, mp3-128`);
+  process.exit(1);
+} else {
+  // Although becuase of the check above, it technically cannot be undefined, we have to do this anyways.
+  dlQuality = args.values.quality ?? "";
+  console.log(`Downloading songs at ${dlQuality} quality!`);
+}
 
 const outputDir = join(import.meta.dir, 'out');
 if (!existsSync(outputDir)) {
@@ -54,6 +70,7 @@ if (!existsSync(outputDir)) {
 }
 let songObj: song[] = [];
 if (args.values.useCache) {
+  console.log("Using cached IDs!\n")
   const cacheFileB: BunFile = Bun.file(join(import.meta.dir, '.cacheFile.json'));
   const cacheFileBContents = await cacheFileB.text(); 
   songObj = JSON.parse(cacheFileBContents);
@@ -134,20 +151,25 @@ await Bun.sleep(1000);
 
 for (let i = 0; i < songObj.length; i++) {
   console.log(ok(`Downloading: ${songObj[i].name} `) + okBlue(`(ID: ${songObj[i].id})`));
-  let dlLink = await getDownloadURL(songObj[i].id, 'flac', '', sessionID);
+  let dlLink = await getDownloadURL(songObj[i].id, dlQuality, '', sessionID);
   if (dlLink == undefined) {
     currentCaptchaToken = '';
     currentDlID = songObj[i].id;
     while (currentCaptchaToken == '') {
       await Bun.sleep(500);
     }
-    dlLink = await getDownloadURL(songObj[i].id, 'flac', currentCaptchaToken, sessionID);
+    dlLink = await getDownloadURL(songObj[i].id, dlQuality, currentCaptchaToken, sessionID);
     if (dlLink == undefined) {
       console.error("Something went wrong!!");
       process.exit(1);
     }
   }
-  const filePath = join(import.meta.dir, `out/${sanitize(songObj[i].artist)} - ${sanitize(songObj[i].name)}.flac`);
+  let filePath: string = "";
+  if (dlQuality == 'flac') {
+    filePath = join(import.meta.dir, `out/${sanitize(songObj[i].artist)} - ${sanitize(songObj[i].name)}.flac`);
+  } else {
+    filePath = join(import.meta.dir, `out/${sanitize(songObj[i].artist)} - ${sanitize(songObj[i].name)}.mp3`);
+  }
   https.get(dlLink, (res) => {
     const fileStream = createWriteStream(filePath);
     res.pipe(fileStream);
