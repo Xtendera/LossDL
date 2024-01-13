@@ -10,9 +10,9 @@ So this is basically an improved version of another script I had written in Pyth
 
 - A relatively modern 64-bit CPU
 - A stable and fast internet connection
-- At least 8 GB RAM
+- At least 6 GB RAM
 - 500MB+ of storage (depending on the length of the songs list)
-- Any distro of Linux or MacOS
+- Any distro of Linux or MacOS (Windows will be supported as soon as BunJS provides binaries for the platform)
 
 # Installation
 
@@ -31,11 +31,15 @@ Install all the dependancies:
 bun install
 ```
 
-Run the code with:
-```shell
-bun run index.ts
-```
-And follow the instructions shown in the console.
+# Usage
 
+```
+bun run index.ts [ARGS]
+```
+
+`--useCache (-c)` Uses cachefile instead of songs.txt. Use this if the program crashed or got stopped, it can resume from where it began (considering it was already to download stage). Default: **FALSE**.
+
+
+`--quality (-q)` Specify download quality. Valid qualities are: *mp3-128, mp3-320,* and *flac*. *mp3-128* is 128 Kbps, *mp3-320* is 320 Kbps, and *flac* is flac (lossless) quality. Default: *mp3-320*.
 
 **WARNING**: This project is provided for educational purposes only. Piracy is illegal and unethical.
