@@ -60,7 +60,7 @@ if (!qualities.includes(args.values.quality ?? "")) {
 } else {
   // Although becuase of the check above, it technically cannot be undefined, we have to do this anyways.
   dlQuality = args.values.quality ?? "";
-  console.log(`Downloading songs at ${dlQuality} quality!`);
+  console.log(okBlue(`Downloading songs at ${dlQuality} quality!\n`));
 }
 
 const outputDir = join(import.meta.dir, 'out');
@@ -70,7 +70,7 @@ if (!existsSync(outputDir)) {
 }
 let songObj: song[] = [];
 if (args.values.useCache) {
-  console.log("Using cached IDs!\n")
+  console.log(okBlue("Using cached IDs!\n"))
   const cacheFileB: BunFile = Bun.file(join(import.meta.dir, '.cacheFile.json'));
   const cacheFileBContents = await cacheFileB.text(); 
   songObj = JSON.parse(cacheFileBContents);
