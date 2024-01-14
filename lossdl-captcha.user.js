@@ -3,7 +3,7 @@
 // @namespace   Violentmonkey Scripts
 // @match       https://free-mp3-download.net/*
 // @grant       GM.xmlHttpRequest
-// @version     5
+// @version     3
 // @author      Xtendera
 // @description 12/30/2023, 12:27:12 AM
 // @downloadURL https://github.com/Xtendera/LossDL/raw/master/lossdl-captcha.user.js
