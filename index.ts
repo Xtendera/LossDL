@@ -97,13 +97,13 @@ const rewriter = new HTMLRewriter()
   .on("div.g-recaptcha", {
     element(el) {
       if (el.hasAttribute("data-sitekey")) {
-        captchaSiteKey = el.getAttribute("data-sitekey");
+        captchaSitekey = el.getAttribute("data-sitekey");
         return;
       }
     }
   });
 
-rewriter.transform(dlP.data)
+rewriter.transform(dlP.data);
 if (captchaSitekey == null) {
   console.log(warn("WARNING: Could not identify captcha sitekey. Using default key instead. It might be outdated!"));
   captchaSitekey = "6LfzIW4UAAAAAM_JBVmQuuOAw4QEA1MfXVZuiO2A";
