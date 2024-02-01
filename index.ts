@@ -2,7 +2,6 @@ import chalk, { ChalkInstance } from 'chalk';
 import { existsSync, mkdirSync, createWriteStream } from 'fs';
 import { join } from 'path';
 import axios from 'axios';
-import jsdom from 'jsdom';
 import https from 'https';
 import { readSongs, song } from './fetchSongs';
 import { BunFile } from 'bun';
@@ -92,9 +91,19 @@ if (dlP.status != 200) {
   console.error("Something went wrong, please check your internet connection!")
   process.exit(1);
 }
-const { JSDOM } = jsdom;
-const dom = new JSDOM(dlP.data);
-let captchaSitekey: string | null = dom.window.document.getElementsByClassName('g-recaptcha')[0].getAttribute('data-sitekey');
+
+let captchaSitekey: string | null = null;
+const rewriter = new HTMLRewriter()
+  .on("div.g-recaptcha", {
+    element(el) {
+      if (el.hasAttribute("data-sitekey")) {
+        captchaSiteKey = el.getAttribute("data-sitekey");
+        return;
+      }
+    }
+  });
+
+rewriter.transform(dlP.data)
 if (captchaSitekey == null) {
   console.log(warn("WARNING: Could not identify captcha sitekey. Using default key instead. It might be outdated!"));
   captchaSitekey = "6LfzIW4UAAAAAM_JBVmQuuOAw4QEA1MfXVZuiO2A";
