@@ -12,7 +12,7 @@ So this is basically an improved version of another script I had written in Pyth
 - A stable and fast internet connection
 - At least 6 GB RAM
 - 500MB+ of storage (depending on the length of the songs list)
-- Any distro of Linux or MacOS (Windows will be supported as soon as BunJS provides binaries for the platform)
+- Any distro of Linux or MacOS, Windows 10/11 64-bit
 
 # Installation
 
