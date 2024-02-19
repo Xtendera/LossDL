@@ -22,7 +22,7 @@ export async function readSongs(): Promise<song[]> {
     const songsFile = join(import.meta.dir, 'songs.txt');
     const songsFileExists = existsSync(songsFile);
     if (!songsFileExists) {
-        console.log(error("ERROR: songs.txt does not exist!"));
+        console.error("Songs.txt does not exist!");
         process.exit(1);
     }
     const songsFileContents = Bun.file("songs.txt");
@@ -45,7 +45,7 @@ export async function readSongs(): Promise<song[]> {
 
         console.log(ok(`Found: ${songName} `) + okBlue(`(ID: ${searchRes.data.data[0].id})`));
     }
-    
+
     Bun.write(join(import.meta.dir, ".cacheFile.json"), JSON.stringify(songObj));
     return songObj;
 }
