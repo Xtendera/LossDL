@@ -74,7 +74,11 @@ if (args.values.useCache) {
   const cacheFileBContents = await cacheFileB.text(); 
   songObj = JSON.parse(cacheFileBContents);
 } else {
-  songObj = await readSongs()
+  songObj = await readSongs();
+  if (songObj.length == 0) {
+    console.error("No Songs Found in songs.txt!");
+    process.exit(1);
+  }
 }
 
 console.log(header(bold("\nLocating session ID and RECAPTCHA token...\n")));

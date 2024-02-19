@@ -45,7 +45,7 @@ export async function readSongs(): Promise<song[]> {
 
         console.log(ok(`Found: ${songName} `) + okBlue(`(ID: ${searchRes.data.data[0].id})`));
     }
-
+    
     Bun.write(join(import.meta.dir, ".cacheFile.json"), JSON.stringify(songObj));
     return songObj;
 }
