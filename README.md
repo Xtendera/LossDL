@@ -1,5 +1,8 @@
 # LossDL
 
+> [!WARNING]  
+> The website this project was based off has been shut off, making this tool useless. Project will stay for archival purposes.
+
 _Script to download lossless music automatically._
 
 ## Info
